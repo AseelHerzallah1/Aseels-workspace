@@ -1,12 +1,12 @@
-# Grounded
+# 🤖 Grounded
 
 A full-stack portfolio chatbot that lets recruiters explore **Aseel Herzallah's** background through natural conversation — with answers grounded in verified profile content, not open-ended guessing.
 
-**Live demo:** *(add URL after deploy)*
+**🌐 Live demo:** *(add URL after deploy)*
 
 ---
 
-## What it does
+## 💬 What it does
 
 Visitors land on a public portfolio chat interface and can ask about projects, skills, experience, education, and role fit. The assistant answers in the third person, cites retrieved sources, and stays within the knowledge base.
 
@@ -16,13 +16,13 @@ Three public modes tailor the experience:
 
 | Mode | Purpose |
 |------|---------|
-| **About Me** | Friendly overview of background and strengths |
-| **For Recruiters** | Hiring-manager briefing — fit, evidence, stack |
-| **Role Fit** | Paste a job description; get structured match analysis |
+| ✦ **About Me** | Friendly overview of background and strengths |
+| ◈ **For Recruiters** | Hiring-manager briefing — fit, evidence, stack |
+| ◎ **Role Fit** | Paste a job description; get structured match analysis |
 
 ---
 
-## Architecture
+## 🏗️ Architecture
 
 ```
 content/*.md  →  chunk + embed  →  vector index
@@ -42,20 +42,20 @@ The browser talks directly to the FastAPI backend for chat streaming. Auth and o
 
 ---
 
-## Features
+## ✨ Features
 
-- **Retrieval-augmented generation (RAG)** — answers constrained to indexed profile documents
-- **Streaming responses** — token-by-token output with source panel per reply
-- **Response tones** — Plain, Technical, Notes, Pitch, Code (prompt-level style control)
-- **Rotating suggested questions** — six starters on home; four replaceable chips in chat
-- **Role Fit mode** — structured comparison against a pasted job description
-- **Google sign-in** — public portfolio vs. private workspace with post-login routing
-- **Per-user document RAG** — upload `.md` / `.txt` in workspace for personal context
-- **Dark cosmic UI** — portfolio-aligned theme, compact composer, mode tabs
+- 🔍 **Retrieval-augmented generation (RAG)** — answers constrained to indexed profile documents
+- ⚡ **Streaming responses** — token-by-token output with source panel per reply
+- 🎯 **Response tones** — Plain, Technical, Notes, Pitch, Code (prompt-level style control)
+- 💡 **Rotating suggested questions** — six starters on home; four replaceable chips in chat
+- 📋 **Role Fit mode** — structured comparison against a pasted job description
+- 🔐 **Google sign-in** — public portfolio vs. private workspace with post-login routing
+- 📎 **Per-user document RAG** — upload `.md` / `.txt` in workspace for personal context
+- 🌌 **Dark cosmic UI** — portfolio-aligned theme, compact composer, mode tabs
 
 ---
 
-## Project structure
+## 📁 Project structure
 
 ```
 ├── frontend/          Next.js app (public chat + signed-in workspace)
@@ -69,7 +69,7 @@ The browser talks directly to the FastAPI backend for chat streaming. Auth and o
 
 ---
 
-## What I built & learned
+## 🎓 What I built & learned
 
 - **End-to-end RAG pipeline** — chunking markdown, embedding with `BAAI/bge-small-en-v1.5`, similarity search, and prompt injection with strict grounding rules
 - **Grounded prompt design** — third-person recruiter voice, length control, inline answers (no “see the About page”), mode- and tone-specific system prompts
@@ -80,7 +80,7 @@ The browser talks directly to the FastAPI backend for chat streaming. Auth and o
 
 ---
 
-## Tech highlights
+## 🛠️ Tech highlights
 
 - **Next.js App Router** — client components, layout, API routes for auth and optional MongoDB conversations
 - **FastAPI** — CORS, multipart uploads, streaming `StreamingResponse`
@@ -89,7 +89,7 @@ The browser talks directly to the FastAPI backend for chat streaming. Auth and o
 
 ---
 
-## Author
+## 👋 Author
 
 **Aseel Herzallah** — Junior Software Engineer · Full-Stack · Generative AI · Systems
 

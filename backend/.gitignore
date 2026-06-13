@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# Environment
+.env
+
+# Generated indexes and user uploads
+data/users/
+
+# OS
+.DS_Store

@@ -1,8 +1,8 @@
-# 🤖 Grounded
+# Grounded
 
 A full-stack portfolio chatbot that lets recruiters explore **Aseel Herzallah's** background through natural conversation — with answers grounded in verified profile content, not open-ended guessing.
 
-**🌐 Live demo:** *(add URL after deploy)*
+**Live demo:** *(add URL after deploy)*
 
 ---
 
@@ -16,9 +16,9 @@ Three public modes tailor the experience:
 
 | Mode | Purpose |
 |------|---------|
-| ✦ **About Me** | Friendly overview of background and strengths |
-| ◈ **For Recruiters** | Hiring-manager briefing — fit, evidence, stack |
-| ◎ **Role Fit** | Paste a job description; get structured match analysis |
+| **About Me** | Friendly overview of background and strengths |
+| **For Recruiters** | Hiring-manager briefing — fit, evidence, stack |
+| **Role Fit** | Paste a job description; get structured match analysis |
 
 ---
 
@@ -44,14 +44,14 @@ The browser talks directly to the FastAPI backend for chat streaming. Auth and o
 
 ## ✨ Features
 
-- 🔍 **Retrieval-augmented generation (RAG)** — answers constrained to indexed profile documents
-- ⚡ **Streaming responses** — token-by-token output with source panel per reply
-- 🎯 **Response tones** — Plain, Technical, Notes, Pitch, Code (prompt-level style control)
-- 💡 **Rotating suggested questions** — six starters on home; four replaceable chips in chat
-- 📋 **Role Fit mode** — structured comparison against a pasted job description
-- 🔐 **Google sign-in** — public portfolio vs. private workspace with post-login routing
-- 📎 **Per-user document RAG** — upload `.md` / `.txt` in workspace for personal context
-- 🌌 **Dark cosmic UI** — portfolio-aligned theme, compact composer, mode tabs
+- **Retrieval-augmented generation (RAG)** — answers constrained to indexed profile documents
+- **Streaming responses** — token-by-token output with source panel per reply
+- **Response tones** — Plain, Technical, Notes, Pitch, Code (prompt-level style control)
+- **Rotating suggested questions** — six starters on home; four replaceable chips in chat
+- **Role Fit mode** — structured comparison against a pasted job description
+- **Google sign-in** — public portfolio vs. private workspace with post-login routing
+- **Per-user document RAG** — upload `.md` / `.txt` in workspace for personal context
+- **Dark cosmic UI** — portfolio-aligned theme, compact composer, mode tabs
 
 ---
 

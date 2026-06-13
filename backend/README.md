@@ -45,6 +45,8 @@ python scripts/build_index.py   # build the vector index
 uvicorn app.main:app --reload --port 8000
 ```
 
+**Deploy (Render):** use Python **3.12** — `runtime.txt` pins this. Python 3.14 fails to build `pydantic-core` on Render's free tier.
+
 Check it: open http://localhost:8000/health
 
 ## Updating your info

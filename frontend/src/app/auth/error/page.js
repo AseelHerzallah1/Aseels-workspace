@@ -53,9 +53,13 @@ function AuthErrorContent() {
           Sign-in issue
         </h1>
         <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
-          Something went wrong while signing in. Check that Google OAuth is configured for this
-          URL, then try again.
+          {error === "Configuration"
+            ? "Server auth config is incomplete. On Vercel, check AUTH_SECRET, AUTH_GOOGLE_ID, and AUTH_GOOGLE_SECRET (Production), then redeploy."
+            : "Something went wrong while signing in. Check that Google OAuth is configured for this URL, then try again."}
         </p>
+        {error && (
+          <p className="mt-2 font-mono text-xs text-slate-500">Error code: {error}</p>
+        )}
         <button
           type="button"
           onClick={() => router.replace("/")}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import { Menu, Home, Trash2 } from "lucide-react";
 import PortfolioBackground from "@/components/PortfolioBackground";
 import Sidebar from "@/components/Sidebar";
@@ -222,7 +223,8 @@ export default function AssistantChat({ session, onGoPublic }) {
         url: `${BACKEND_URL}/chat`,
         body: { messages: outgoing, mode, user_id: userId, style },
         onSources: (sources) => updateLastAssistant({ sources }),
-        onChunk: (acc) => updateLastAssistant({ content: acc }),
+        onChunk: (acc) =>
+          flushSync(() => updateLastAssistant({ content: acc })),
         onError: (errText) =>
           updateLastAssistant({ content: `⚠️ ${errText}`, sources: [] }),
       });
@@ -350,7 +352,15 @@ export default function AssistantChat({ session, onGoPublic }) {
               <div className="space-y-5">
                 {messages.map((m, i) => (
                   <div key={i}>
-                    <ChatMessage role={m.role} content={m.content} />
+                    <ChatMessage
+                      role={m.role}
+                      content={m.content}
+                      streaming={
+                        isStreaming &&
+                        i === messages.length - 1 &&
+                        m.role === "assistant"
+                      }
+                    />
                     {m.role === "assistant" && m.sources?.length > 0 && (
                       <SourcesPanel sources={m.sources} />
                     )}

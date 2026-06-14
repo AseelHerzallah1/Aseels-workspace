@@ -2,8 +2,9 @@
 export async function streamChat({ url, body, onChunk, onSources, onError }) {
   const res = await fetch(url, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", Accept: "text/plain" },
     body: JSON.stringify(body),
+    cache: "no-store",
   });
 
   if (!res.ok || !res.body) {

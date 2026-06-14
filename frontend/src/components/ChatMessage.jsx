@@ -4,7 +4,7 @@ import { Bot, User } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-export default function ChatMessage({ role, content }) {
+export default function ChatMessage({ role, content, streaming = false }) {
   const isUser = role === "user";
 
   return (
@@ -31,9 +31,15 @@ export default function ChatMessage({ role, content }) {
         ) : content ? (
           <div className="md">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
+            {streaming ? (
+              <span
+                aria-hidden
+                className="ml-0.5 inline-block h-4 w-0.5 animate-pulse bg-brand align-middle"
+              />
+            ) : null}
           </div>
         ) : (
-          <span className="opacity-60">…</span>
+          <span className="animate-pulse opacity-60">Thinking…</span>
         )}
       </div>
     </div>

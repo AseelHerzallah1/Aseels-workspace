@@ -1,8 +1,12 @@
 """FastAPI entrypoint for Ask Aseel's Bot."""
+import asyncio
+from collections.abc import AsyncIterator, Iterator
+
 from fastapi import FastAPI, File, Form, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
+from starlette.concurrency import iterate_in_threadpool
 
 from app import chat, config, rag, user_rag
 
@@ -31,6 +35,14 @@ class ChatRequest(BaseModel):
     style: str | None = "plain"
 
 
+async def _stream_bytes(token_iter: Iterator[str]) -> AsyncIterator[bytes]:
+    """Yield UTF-8 chunks immediately — avoids Render/proxy response buffering."""
+    async for token in iterate_in_threadpool(token_iter):
+        if token:
+            yield token.encode("utf-8")
+            await asyncio.sleep(0)
+
+
 @app.get("/health")
 def health():
     try:
@@ -52,10 +64,12 @@ def chat_endpoint(req: ChatRequest):
         style=req.style,
     )
     return StreamingResponse(
-        generator,
+        _stream_bytes(generator),
         media_type="text/plain; charset=utf-8",
         headers={
-            "Cache-Control": "no-cache, no-transform",
+            "Cache-Control": "no-cache, no-store, must-revalidate, no-transform",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no",
             "X-RAG-Sources": chat.sources_header(sources),
         },
     )

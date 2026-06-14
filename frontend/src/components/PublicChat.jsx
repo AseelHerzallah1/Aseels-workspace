@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import { Home } from "lucide-react";
 import Welcome from "@/components/Welcome";
 import ChatMessage from "@/components/ChatMessage";
@@ -65,11 +66,13 @@ export default function PublicChat({ session = null, onGoWorkspace }) {
           });
         },
         onChunk: (acc) => {
-          setMessages((prev) => {
-            const copy = [...prev];
-            const last = copy[copy.length - 1];
-            copy[copy.length - 1] = { ...last, content: acc };
-            return copy;
+          flushSync(() => {
+            setMessages((prev) => {
+              const copy = [...prev];
+              const last = copy[copy.length - 1];
+              copy[copy.length - 1] = { ...last, content: acc };
+              return copy;
+            });
           });
         },
         onError: (errText) => {
@@ -158,7 +161,15 @@ export default function PublicChat({ session = null, onGoWorkspace }) {
             <div className="space-y-5">
               {messages.map((m, i) => (
                 <div key={i}>
-                  <ChatMessage role={m.role} content={m.content} />
+                  <ChatMessage
+                    role={m.role}
+                    content={m.content}
+                    streaming={
+                      isStreaming &&
+                      i === messages.length - 1 &&
+                      m.role === "assistant"
+                    }
+                  />
                   {m.role === "assistant" && m.sources?.length > 0 && (
                     <SourcesPanel sources={m.sources} />
                   )}

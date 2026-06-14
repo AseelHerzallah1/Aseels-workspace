@@ -9,5 +9,5 @@ export default function Providers({ children }) {
     initFontSize();
   }, []);
 
-  return <SessionProvider>{children}</SessionProvider>;
+  return <SessionProvider basePath="/api/auth">{children}</SessionProvider>;
 }

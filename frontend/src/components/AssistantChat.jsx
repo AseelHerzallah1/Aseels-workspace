@@ -12,7 +12,7 @@ import SuggestedQuestions from "@/components/SuggestedQuestions";
 import SourcesPanel from "@/components/SourcesPanel";
 import UserMenu from "@/components/UserMenu";
 import ThemeToggle from "@/components/ThemeToggle";
-import { BACKEND_URL, ASSISTANT_MODE, ASSISTANT_STARTERS } from "@/lib/constants";
+import { BACKEND_URL, CHAT_URL, ASSISTANT_MODE, ASSISTANT_STARTERS } from "@/lib/constants";
 import { useSuggestedQuestions } from "@/hooks/useSuggestedQuestions";
 import { SUGGESTED_HOME_COUNT } from "@/lib/suggestedQuestions";
 import { loadConversations, saveConversations } from "@/lib/storage";
@@ -220,7 +220,7 @@ export default function AssistantChat({ session, onGoPublic }) {
 
     try {
       await streamChat({
-        url: `${BACKEND_URL}/chat`,
+        url: CHAT_URL,
         body: { messages: outgoing, mode, user_id: userId, style },
         onSources: (sources) => updateLastAssistant({ sources }),
         onChunk: (acc) =>

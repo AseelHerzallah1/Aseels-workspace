@@ -2,6 +2,9 @@
 export const BACKEND_URL =
   process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
 
+// Same-origin SSE proxy — streams reliably through Vercel to the browser.
+export const CHAT_URL = "/api/rag-chat";
+
 // App branding — edit these to personalize your portfolio.
 export const APP_NAME = "Grounded";
 export const APP_TAGLINE =

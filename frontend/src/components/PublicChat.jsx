@@ -14,7 +14,7 @@ import AuthButton from "@/components/AuthButton";
 import UserMenu from "@/components/UserMenu";
 import PortfolioBackground from "@/components/PortfolioBackground";
 import { LayoutGrid } from "lucide-react";
-import { PORTFOLIO_STARTERS, RECRUITER_STARTERS, MODES, BACKEND_URL } from "@/lib/constants";
+import { PORTFOLIO_STARTERS, RECRUITER_STARTERS, MODES, CHAT_URL } from "@/lib/constants";
 import { useSuggestedQuestions } from "@/hooks/useSuggestedQuestions";
 import { SUGGESTED_HOME_COUNT } from "@/lib/suggestedQuestions";
 import { streamChat } from "@/lib/chatApi";
@@ -55,7 +55,7 @@ export default function PublicChat({ session = null, onGoWorkspace }) {
 
     try {
       await streamChat({
-        url: `${BACKEND_URL}/chat`,
+        url: CHAT_URL,
         body: { messages: outgoing, mode, style },
         onSources: (sources) => {
           setMessages((prev) => {

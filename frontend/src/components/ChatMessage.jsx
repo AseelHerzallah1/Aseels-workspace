@@ -29,15 +29,19 @@ export default function ChatMessage({ role, content, streaming = false }) {
         {isUser ? (
           content
         ) : content ? (
-          <div className="md">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
-            {streaming ? (
+          streaming ? (
+            <div className="whitespace-pre-wrap">
+              {content}
               <span
                 aria-hidden
                 className="ml-0.5 inline-block h-4 w-0.5 animate-pulse bg-brand align-middle"
               />
-            ) : null}
-          </div>
+            </div>
+          ) : (
+            <div className="md">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
+            </div>
+          )
         ) : (
           <span className="animate-pulse opacity-60">Thinking…</span>
         )}

@@ -9,13 +9,11 @@ import { readAppView, saveAppView, consumeLoginRedirect } from "@/lib/viewMode";
 export default function Home() {
   const { data: session, status } = useSession();
   const [appView, setAppView] = useState("public");
-  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     if (status === "loading") return;
     if (!session) {
       setAppView("public");
-      setReady(true);
       return;
     }
     if (consumeLoginRedirect()) {
@@ -24,7 +22,6 @@ export default function Home() {
     } else {
       setAppView(readAppView());
     }
-    setReady(true);
   }, [session, status]);
 
   function goPublic() {
@@ -37,22 +34,16 @@ export default function Home() {
     setAppView("workspace");
   }
 
-  if (status === "loading" || !ready) {
+  // Don't block the whole page on auth — mobile networks can take several seconds
+  // for /api/auth/session. Show the public chat immediately; sign-in updates in place.
+  if (status === "loading" || !session || appView === "public") {
     return (
-      <div className="flex h-screen items-center justify-center bg-white dark:bg-[#15121f]">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand border-t-transparent" />
-      </div>
+      <PublicChat
+        session={session ?? null}
+        onGoWorkspace={session ? goWorkspace : undefined}
+      />
     );
   }
 
-  if (session && appView === "workspace") {
-    return <AssistantChat session={session} onGoPublic={goPublic} />;
-  }
-
-  return (
-    <PublicChat
-      session={session ?? null}
-      onGoWorkspace={session ? goWorkspace : undefined}
-    />
-  );
+  return <AssistantChat session={session} onGoPublic={goPublic} />;
 }
